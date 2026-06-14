@@ -1,23 +1,23 @@
 <?php
 
-namespace App\Models;
+namespace App\Infrastructure\Persistence\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Reply extends Model
+class Comment extends Model
 {
-    protected $fillable =  [
-        'content',
+    protected $fillable = [
         'user_id',
-        'comment_id',
-        'likes_count',
+        'post_id',
+        'content',
+        'likes_count'
     ];
 
     public function user()
     {
         return $this->belongsTo(User::class);
     }
-    
+
     public function likes()
     {
         return $this->morphMany(Like::class, 'likeable');
