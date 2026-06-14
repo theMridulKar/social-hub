@@ -4,11 +4,16 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
+// auth
 use App\Domain\Repositories\UserRepositoryInterface;
 use App\Infrastructure\Persistence\Repositories\UserRepository;
 
 use App\Domain\Services\Auth\{PasswordHasherInterface, TokenServiceInterface};
 use App\Infrastructure\Services\Auth\{BcryptPasswordHasher, SanctumTokenService};
+
+// post
+use App\Domain\Repositories\PostRepositoryInterface;
+use App\Infrastructure\Persistence\Repositories\PostRepository; 
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -38,6 +43,15 @@ class AppServiceProvider extends ServiceProvider
             TokenServiceInterface::class,
             SanctumTokenService::class
         );
+
+        /**
+         * Post
+         */
+        $this->app->bind(
+            PostRepositoryInterface::class,
+            PostRepository::class
+        );
+
     }
 
     /**
