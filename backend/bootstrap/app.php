@@ -4,6 +4,9 @@ use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 
+use Illuminate\Http\Request;
+use App\Domain\Exceptions\Auth\{UserNotFoundException, InvalidCredentialsException};
+
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
         web: __DIR__.'/../routes/web.php',
@@ -15,5 +18,21 @@ return Application::configure(basePath: dirname(__DIR__))
         //
     })
     ->withExceptions(function (Exceptions $exceptions): void {
-        //
+
+        // auth global exceptions
+        $exceptions->render(
+            function (InvalidCredentialsException $e, Request $request) {
+                return response()->json([
+                    'message' => $e->getMessage(),
+                ], 401);
+            }
+        );
+
+        $exceptions->render(
+            function (UserNotFoundException $e, Request $request) {
+                return response()->json([
+                    'message' => $e->getMessage(),
+                ], 404);
+            }
+        );
     })->create();
