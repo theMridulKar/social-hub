@@ -23,6 +23,10 @@ use App\Infrastructure\Persistence\Repositories\CommentRepository;
 use App\Domain\Repositories\ReplyRepositoryInterface;
 use App\Infrastructure\Persistence\Repositories\ReplyRepository;
 
+// like
+use App\Domain\Repositories\LikeRepositoryInterface;
+use App\Infrastructure\Persistence\Repositories\LikeRepository;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -74,6 +78,14 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             ReplyRepositoryInterface::class,
             ReplyRepository::class
+        );
+
+        /**
+         * like 
+         */
+        $this->app->bind(
+            LikeRepositoryInterface::class,
+            LikeRepository::class
         );
     }
 
