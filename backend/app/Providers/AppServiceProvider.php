@@ -19,6 +19,10 @@ use App\Infrastructure\Persistence\Repositories\PostRepository;
 use App\Domain\Repositories\CommentRepositoryInterface;
 use App\Infrastructure\Persistence\Repositories\CommentRepository;
 
+// reply
+use App\Domain\Repositories\ReplyRepositoryInterface;
+use App\Infrastructure\Persistence\Repositories\ReplyRepository;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -64,6 +68,13 @@ class AppServiceProvider extends ServiceProvider
             CommentRepository::class
         );
 
+        /**
+         * Reply
+         */
+        $this->app->bind(
+            ReplyRepositoryInterface::class,
+            ReplyRepository::class
+        );
     }
 
     /**

@@ -7,6 +7,7 @@ use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use App\Domain\Exceptions\Auth\{UserNotFoundException, InvalidCredentialsException};
 use App\Domain\Exceptions\Comment\PostNotFoundException;
+use App\Domain\Exceptions\Reply\CommentNotFoundException;
 use Throwable;
 
 return Application::configure(basePath: dirname(__DIR__))
@@ -41,6 +42,15 @@ return Application::configure(basePath: dirname(__DIR__))
         // comment global exceptions
         $exceptions->render(
             function (PostNotFoundException $e,Request $request) {
+                return response()->json([
+                    'message' => $e->getMessage(),
+                ], 404);
+            }
+        );
+
+        // reply global exceptions
+        $exceptions->render(
+            function (CommentNotFoundException $e,Request $request) {
                 return response()->json([
                     'message' => $e->getMessage(),
                 ], 404);
