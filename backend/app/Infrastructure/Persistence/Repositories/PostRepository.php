@@ -21,18 +21,6 @@ class PostRepository implements PostRepositoryInterface
         return $post ? $this->toDomain($post) : null;
     }
 
-    public function getAll(): array
-    {
-        return PostModel::query()->latest()->get()
-            ->map(fn (PostModel $post) => $this->toDomain($post))
-            ->all();
-    }
-
-    public function delete(int $id): void
-    {
-        PostModel::destroy($id);
-    }
-
     private function toDomain(PostModel $post): DomainPost {
 
         return new DomainPost(

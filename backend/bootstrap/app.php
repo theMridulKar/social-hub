@@ -3,9 +3,11 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
-
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use App\Domain\Exceptions\Auth\{UserNotFoundException, InvalidCredentialsException};
+use App\Domain\Exceptions\Comment\PostNotFoundException;
+use Throwable;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -35,4 +37,32 @@ return Application::configure(basePath: dirname(__DIR__))
                 ], 404);
             }
         );
+
+        // comment global exceptions
+        $exceptions->render(
+            function (PostNotFoundException $e,Request $request) {
+                return response()->json([
+                    'message' => $e->getMessage(),
+                ], 404);
+            }
+        );
+        
+        // database error
+        $exceptions->render(
+            function (QueryException $e, Request $request) {
+                return response()->json([
+                    'message' => 'Database error occurred.'
+                ], 500);
+            }
+        );
+
+        // unexpected error
+        $exceptions->render(
+            function (Throwable $e, Request $request) {
+                return response()->json([
+                    'message' => 'Internal server error.'
+                ], 500);
+            }
+        );
+
     })->create();

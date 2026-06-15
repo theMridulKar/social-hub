@@ -15,6 +15,10 @@ use App\Infrastructure\Services\Auth\{BcryptPasswordHasher, SanctumTokenService}
 use App\Domain\Repositories\PostRepositoryInterface;
 use App\Infrastructure\Persistence\Repositories\PostRepository; 
 
+// comment
+use App\Domain\Repositories\CommentRepositoryInterface;
+use App\Infrastructure\Persistence\Repositories\CommentRepository;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -50,6 +54,14 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             PostRepositoryInterface::class,
             PostRepository::class
+        );
+
+        /**
+         * Comment
+         */
+        $this->app->bind(
+            CommentRepositoryInterface::class,
+            CommentRepository::class
         );
 
     }
