@@ -22,4 +22,9 @@ class Reply extends Model
     {
         return $this->morphMany(Like::class, 'likeable');
     }
+
+    public function comment()
+    {
+        return $this->belongsTo(Comment::class);
+    }
 }

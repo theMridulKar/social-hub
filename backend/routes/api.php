@@ -8,6 +8,7 @@ use App\Presentation\Controllers\PostController;
 use App\Presentation\Controllers\CommentController;
 use App\Presentation\Controllers\ReplyController;
 use App\Presentation\Controllers\LikeController;
+use App\Presentation\Controllers\FeedController;
 
 // guest
 Route::post('/register', [AuthController::class, 'register']);
@@ -28,4 +29,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/posts/{postId}/like', [LikeController::class, 'togglePostLike']);
     Route::post('/comments/{commentId}/like', [LikeController::class, 'toggleCommentLike']);
     Route::post('/replies/{replyId}/like', [LikeController::class, 'toggleReplyLike']);
+
+    // feed
+    Route::get('/feed', [FeedController::class, 'index']);
 });

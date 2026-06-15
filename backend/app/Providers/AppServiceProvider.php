@@ -27,6 +27,10 @@ use App\Infrastructure\Persistence\Repositories\ReplyRepository;
 use App\Domain\Repositories\LikeRepositoryInterface;
 use App\Infrastructure\Persistence\Repositories\LikeRepository;
 
+// feed
+use App\Domain\Repositories\FeedRepositoryInterface;
+use App\Infrastructure\Persistence\Repositories\FeedRepository;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -86,6 +90,15 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             LikeRepositoryInterface::class,
             LikeRepository::class
+        );
+
+        /**
+         * feed
+         */
+
+        $this->app->bind(
+            FeedRepositoryInterface::class,
+            FeedRepository::class
         );
     }
 
