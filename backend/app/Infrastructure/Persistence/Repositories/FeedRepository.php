@@ -9,9 +9,9 @@ class FeedRepository implements FeedRepositoryInterface
 {
     public function getFeed(): array
     {
-        return PostModel::query()->with([
+        return PostModel::query()
+            ->with([
                 'user',
-                'likes',
 
                 'comments',
                 'comments.user',
@@ -20,7 +20,6 @@ class FeedRepository implements FeedRepositoryInterface
                 'comments.replies',
                 'comments.replies.user',
                 'comments.replies.likes',
-            ])
-            ->latest()->get()->all();
+            ])->withCount(['likes', 'comments'])->latest()->get()->all();
     }
 }
