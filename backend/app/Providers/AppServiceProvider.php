@@ -31,11 +31,6 @@ use App\Infrastructure\Persistence\Repositories\LikeRepository;
 use App\Domain\Repositories\FeedRepositoryInterface;
 use App\Infrastructure\Persistence\Repositories\FeedRepository;
 
-use Illuminate\Database\Eloquent\Relations\Relation;
-use \App\Infrastructure\Persistence\Models\Post;
-use \App\Infrastructure\Persistence\Models\Comment;
-use \App\Infrastructure\Persistence\Models\Reply;
-
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -110,13 +105,8 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Bootstrap any application services.
      */
-
     public function boot(): void
     {
-        Relation::morphMap([
-            'post' => Post::class,
-            'comment' => Comment::class,
-            'reply' => Reply::class,
-        ]);
+        //
     }
 }
