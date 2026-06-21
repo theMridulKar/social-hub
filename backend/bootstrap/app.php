@@ -58,13 +58,13 @@ return Application::configure(basePath: dirname(__DIR__))
         );
         
         // database error
-        $exceptions->render(
-            function (QueryException $e, Request $request) {
-                return response()->json([
-                    'message' => 'Database error occurred.'
-                ], 500);
-            }
-        );
+        // $exceptions->render(
+        //     function (QueryException $e, Request $request) {
+        //         return response()->json([
+        //             'message' => 'Database error occurred.'
+        //         ], 500);
+        //     }
+        // );
 
         // unexpected error
         // $exceptions->render(
